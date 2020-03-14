@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SteamApiTest {
 
@@ -37,5 +38,36 @@ public class SteamApiTest {
         List<String> filtered = CollectionUtils.filterStartWith(strings, "s");
 
         assert filtered.size() == 2;
+    }
+
+    @Test
+    public void primeFilterTest() {
+        List<Integer> integers = Arrays.asList(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        List<Integer> primes = CollectionUtils.filterPrimes(integers);
+
+        assert primes.size() == 4;
+    }
+
+    @Test
+    public void primeFilterTest2() {
+        List<Integer> integers = Arrays.asList(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        long primes = CollectionUtils.countOfPrimes(integers);
+
+        assert primes == 4;
+    }
+
+    @Test
+    public void meanTest() {
+        List<Integer> integers = Arrays.asList(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        double mean = CollectionUtils.mean(integers);
+
+        assert mean == 9.0;
+    }
+
+    @Test
+    public void longestSeqTest() {
+        List<Integer> integers = Arrays.asList(1, 3, 5, 6, 8, 5, 5, 3, 3, 1, 8);
+        int longestSeq = CollectionUtils.longestSequenceOddNumber(integers);
+        assert longestSeq == 5;
     }
 }
