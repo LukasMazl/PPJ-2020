@@ -2,6 +2,7 @@ package cz.tul.ppj;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CollectionUtils {
 
@@ -15,10 +16,6 @@ public class CollectionUtils {
 
     public static List<Integer> filterPrimes(Collection<Integer> integerCollection) {
         return integerCollection.stream().filter(MathUtils::isPrime).collect(Collectors.toList());
-    }
-
-    public static long countOfPrimes(Collection<Integer> integerCollection) {
-        return integerCollection.stream().filter(MathUtils::isPrime).count();
     }
 
     public static double mean(Collection<Integer> integerCollection) {
@@ -38,4 +35,10 @@ public class CollectionUtils {
         }).max().getAsInt();
         return longestSequence;
     }
+
+    public static long countOfPrimes(List<Integer> integerList) {
+        IntStream intStream = integerList.stream().mapToInt(Integer::intValue);
+        return intStream.filter(MathUtils::isPrime).count();
+    }
+
 }

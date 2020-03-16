@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SteamApiTest {
 
@@ -68,6 +70,29 @@ public class SteamApiTest {
     public void longestSeqTest() {
         List<Integer> integers = Arrays.asList(1, 3, 5, 6, 8, 5, 5, 3, 3, 1, 8);
         int longestSeq = CollectionUtils.longestSequenceOddNumber(integers);
+        assert longestSeq == 5;
+    }
+
+    @Test
+    public void primeFilterTestIntStream() {
+        IntStream intStream = IntStream.of(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        long primes = SteamUtils.countOfPrimes(intStream);
+
+        assert primes == 4;
+    }
+
+    @Test
+    public void meanTestIntStream() {
+        IntStream intStream = IntStream.of(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        double mean = SteamUtils.mean(intStream);
+
+        assert mean == 9.0;
+    }
+
+    @Test
+    public void longestSeqTestIntStream() {
+        IntStream intStream = IntStream.of(1, 3, 5, 6, 8, 5, 5, 3, 3, 1, 8);
+        int longestSeq = SteamUtils.longestSequenceOddNumber(intStream);
         assert longestSeq == 5;
     }
 }
