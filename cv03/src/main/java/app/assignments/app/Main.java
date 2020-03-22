@@ -19,8 +19,8 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/application-context.xml");
         //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/application-context-beans.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/application-context.xml");
 
 
         Message ping = applicationContext.getBean(PingMessage.class);
