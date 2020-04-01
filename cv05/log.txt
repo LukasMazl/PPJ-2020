@@ -1,0 +1,42 @@
+19:29:46.556 [main] INFO  ppj.assignments.Main - Starting Main on Lukas-Z87-PC with PID 10148 (C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6\target\classes started by Lukas-Z87 in C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6)
+19:29:46.558 [main] DEBUG ppj.assignments.Main - Running with Spring Boot v1.3.2.RELEASE, Spring v4.2.4.RELEASE
+19:29:46.558 [main] INFO  ppj.assignments.Main - The following profiles are active: devel
+19:29:47.194 [main] DEBUG o.h.v.i.e.r.DefaultTraversableResolver - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+19:29:47.197 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+19:29:47.197 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+19:29:47.200 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy27
+19:29:47.202 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+19:29:47.202 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via user class loader
+19:29:47.203 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+19:29:47.203 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+19:29:47.203 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+19:29:47.465 [main] INFO  ppj.assignments.Main - Started Main in 1.215 seconds (JVM running for 1.531)
+19:29:47.466 [main] DEBUG ppj.assignments.Main - Application PPJ_cv6 [profiles devel, description 'Develop']
+19:30:20.836 [main] INFO  ppj.assignments.Main - Starting Main on Lukas-Z87-PC with PID 8628 (C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6\target\classes started by Lukas-Z87 in C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6)
+19:30:20.838 [main] DEBUG ppj.assignments.Main - Running with Spring Boot v1.3.2.RELEASE, Spring v4.2.4.RELEASE
+19:30:20.838 [main] INFO  ppj.assignments.Main - The following profiles are active: devel
+19:30:21.587 [main] DEBUG o.h.v.i.e.r.DefaultTraversableResolver - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+19:30:21.590 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+19:30:21.590 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+19:30:21.591 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy27
+19:30:21.592 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+19:30:21.593 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via user class loader
+19:30:21.593 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+19:30:21.594 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+19:30:21.594 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+19:30:21.822 [main] INFO  ppj.assignments.Main - Started Main in 1.286 seconds (JVM running for 1.598)
+19:30:21.822 [main] DEBUG ppj.assignments.Main - Application PPJ_cv6 [profiles devel, description 'Develop']
+19:31:02.173 [main] INFO  ppj.assignments.Main - Starting Main on Lukas-Z87-PC with PID 8684 (C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6\target\classes started by Lukas-Z87 in C:\Users\Lukas-Z87\Desktop\intellij\ppj_cv6)
+19:31:02.175 [main] DEBUG ppj.assignments.Main - Running with Spring Boot v1.3.2.RELEASE, Spring v4.2.4.RELEASE
+19:31:02.175 [main] INFO  ppj.assignments.Main - The following profiles are active: devel
+19:31:03.061 [main] DEBUG o.h.v.i.e.r.DefaultTraversableResolver - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+19:31:03.084 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+19:31:03.084 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+19:31:03.087 [main] DEBUG o.h.v.i.engine.ConfigurationImpl - Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy27
+19:31:03.088 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+19:31:03.089 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via user class loader
+19:31:03.090 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+19:31:03.090 [main] DEBUG o.h.v.i.xml.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+19:31:03.090 [main] DEBUG o.h.v.i.xml.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+19:31:03.408 [main] INFO  ppj.assignments.Main - Started Main in 1.536 seconds (JVM running for 1.868)
+19:31:03.408 [main] DEBUG ppj.assignments.Main - Application PPJ_cv6 [profiles devel, description 'Develop']

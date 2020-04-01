@@ -4,6 +4,7 @@
     <list default="true" id="2349f0c6-161c-4b17-810f-ac17358524f5" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../cv04/.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../cv04/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cv04/src/main/java/app/assignments/conf/MessageConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
@@ -36,10 +37,7 @@
       <change beforePath="$PROJECT_DIR$/../cv02/string-intro.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cv02/target/classes/application-context-beans.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cv02/target/classes/application-context.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/assignments/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/assignments/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/assignments/message/CustomMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/assignments/message/CustomMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/assignments/message/ReplyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/assignments/message/ReplyMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/application-context-beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/application-context-beans.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,6 +82,7 @@
     <session id="161359707">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -91,12 +90,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="54" />
+          <entry key="txt" value="8" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="54" />
+          <entry key="PLAIN_TEXT" value="8" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -126,8 +127,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/assignments/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="493">
+              <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -362,7 +363,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1584366430466" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1584875842574" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -424,12 +425,20 @@
       <option name="presentableId" value="Default" />
       <updated>1584363636379</updated>
       <workItem from="1584363639437" duration="2785000" />
-      <workItem from="1584873780095" duration="444000" />
+      <workItem from="1584873780095" duration="1100000" />
     </task>
+    <task id="LOCAL-00001" summary="Oprava">
+      <created>1584874264925</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1584874264925</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3229000" />
+    <option name="totallyTimeSpent" value="3885000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -444,7 +453,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -471,6 +480,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Oprava" />
+    <option name="LAST_COMMIT_MESSAGE" value="Oprava" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application-context.xml" />
@@ -569,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/assignments/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="493">
+          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
         </state>
       </provider>
     </entry>
