@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "name": "cz.mazl.tul.hibernate",
+      "type": "cz.mazl.tul.configs.HibernateProperties",
+      "sourceType": "cz.mazl.tul.configs.HibernateProperties"
+    },
+    {
+      "name": "cz.mazl.tul.hibernate",
+      "type": "cz.mazl.tul.configs.HibernateConfiguration",
+      "sourceType": "cz.mazl.tul.configs.HibernateConfiguration"
+    }
+  ],
+  "properties": [{
+    "name": "cz.mazl.tul.hibernate.dialect",
+    "type": "java.lang.String",
+    "sourceType": "cz.mazl.tul.configs.HibernateProperties"
+  }],
+  "hints": []
+}
