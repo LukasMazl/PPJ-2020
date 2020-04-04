@@ -2,6 +2,8 @@ package cz.mazl.tul.blogic.provider;
 
 import cz.mazl.tul.blogic.provider.weather.HistoricalWeatherData;
 import cz.mazl.tul.blogic.provider.weather.WeatherData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.net.URLEncoder;
 @Service
 public class SimpleWeatherApiProvider implements WeatherApiProvider {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleWeatherApiProvider.class);
+
     private WeatherProviderProps weatherProviderProps;
 
     @Autowired
@@ -25,6 +29,7 @@ public class SimpleWeatherApiProvider implements WeatherApiProvider {
     public WeatherData currentWeather(String country, String city) {
         RestTemplate restTemplate = new RestTemplate();
         String urlAndQuery = prepareUrlAndQuery(country, city);
+        LOGGER.debug("Getting response from url {}", urlAndQuery);
         ResponseEntity<WeatherData> response
                 = restTemplate.getForEntity(urlAndQuery, WeatherData.class);
         return response.getBody();
@@ -46,7 +51,7 @@ public class SimpleWeatherApiProvider implements WeatherApiProvider {
         try {
             encodedCountry = URLEncoder.encode(country, "UTF-8");
             encodedCity = URLEncoder.encode(city, "UTF-8");
-            return encodedCity + "," +encodedCountry;
+            return encodedCity + "," + encodedCountry;
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e.getMessage());
         }
