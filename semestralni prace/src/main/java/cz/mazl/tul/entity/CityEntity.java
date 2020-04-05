@@ -8,6 +8,7 @@ public class CityEntity {
 
     @Id
     @Column(name = "city_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name", nullable = false, unique = true)

@@ -9,6 +9,7 @@ public class CountryEntity {
 
     @Id
     @Column(name = "country_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "iso")
@@ -17,7 +18,7 @@ public class CountryEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private List<CityEntity> cityList;
 
     public long getId() {

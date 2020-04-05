@@ -1,0 +1,38 @@
+package cz.mazl.tul.controller.rest;
+
+import cz.mazl.tul.blogic.service.country.CountryService;
+import cz.mazl.tul.dto.in.CreateCountryDTO;
+import cz.mazl.tul.dto.in.DeleteCountryDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CountryRestController {
+
+    private CountryService countryService;
+
+    @Autowired
+    public CountryRestController(CountryService countryService) {
+        this.countryService = countryService;
+    }
+
+    @RequestMapping(path = "/api/country/create", method = RequestMethod.POST)
+    @Transactional
+    public ResponseEntity<String> createCountry(@RequestBody CreateCountryDTO createCountryDTO) {
+        long id = countryService.createCountry(createCountryDTO);
+        return ResponseEntity.ok("Country has been created with id " + id);
+    }
+
+    @RequestMapping(path = "/api/country/delete")
+    @Transactional
+    public ResponseEntity<String> deleteCountry(@RequestBody DeleteCountryDTO deleteCountryDTO) {
+        countryService.deleteCountry(deleteCountryDTO);
+        return ResponseEntity.ok("Country has been deleted");
+    }
+
+}

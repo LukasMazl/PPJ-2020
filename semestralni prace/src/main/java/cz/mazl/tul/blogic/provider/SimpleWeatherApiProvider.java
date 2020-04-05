@@ -16,7 +16,7 @@ import java.net.URLEncoder;
 @Service
 public class SimpleWeatherApiProvider implements WeatherApiProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleWeatherApiProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleWeatherApiProvider.class);
 
     private WeatherProviderProps weatherProviderProps;
 
@@ -29,7 +29,7 @@ public class SimpleWeatherApiProvider implements WeatherApiProvider {
     public WeatherData currentWeather(String country, String city) {
         RestTemplate restTemplate = new RestTemplate();
         String urlAndQuery = prepareUrlAndQuery(country, city);
-        LOGGER.debug("Getting response from url {}", urlAndQuery);
+        LOG.debug("Getting response from url {}", urlAndQuery);
         ResponseEntity<WeatherData> response
                 = restTemplate.getForEntity(urlAndQuery, WeatherData.class);
         return response.getBody();
