@@ -1,7 +1,7 @@
 package cz.mazl.tul.controller;
 
-import cz.mazl.tul.blogic.action.index.PrepareIndexDataAction;
-import cz.mazl.tul.dto.IndexDataDTO;
+import cz.mazl.tul.blogic.service.index.PrepareIndexDataService;
+import cz.mazl.tul.dto.out.index.IndexDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
     @Autowired
-    private PrepareIndexDataAction prepareIndexData;
+    private PrepareIndexDataService prepareIndexData;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndex(ModelMap modelMap) {

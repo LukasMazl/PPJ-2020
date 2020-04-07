@@ -1,7 +1,12 @@
 package cz.mazl.tul.blogic.service.country;
 
+import cz.mazl.tul.dto.out.CountryDataDTO;
+import cz.mazl.tul.dto.out.index.IndexCountryDataDTO;
 import cz.mazl.tul.dto.in.CreateCountryDTO;
 import cz.mazl.tul.dto.in.DeleteCountryDTO;
+import cz.mazl.tul.dto.in.UpdateCountryDTO;
+
+import java.util.List;
 
 public interface CountryService {
 
@@ -13,5 +18,33 @@ public interface CountryService {
      */
     long createCountry(CreateCountryDTO createCountryDTO);
 
+    /**
+     * Deletes certain country based on iso or country name
+     *
+     * @param deleteCountryDTO
+     */
     void deleteCountry(DeleteCountryDTO deleteCountryDTO);
+
+
+    /**
+     * Updates country based on originIso in UpdateCountryDTO
+     *
+     * @param updateCountryDTO
+     */
+    void updateCountry(UpdateCountryDTO updateCountryDTO);
+
+    /**
+     * This method returns all countries persisted in DB
+     *
+     * @return
+     */
+    List<CountryDataDTO> readAll();
+
+    /**
+     * Method returns country based on iso country code
+     *
+     * @param iso country code
+     * @return
+     */
+    CountryDataDTO readCountry(String iso);
 }

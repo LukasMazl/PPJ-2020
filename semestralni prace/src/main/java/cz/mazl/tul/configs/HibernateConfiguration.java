@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
@@ -11,13 +12,14 @@ import java.util.Properties;
 
 @Configuration
 @ConfigurationProperties(prefix = "cz.mazl.tul.hibernate")
+@Profile("prod")
 public class HibernateConfiguration {
 
     private static final String KEY_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String KEY_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String KEY_HIBERNATE_HDM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
-    @Bean
+    @Bean(name="entityManagerFactory")
     @Autowired
     public LocalSessionFactoryBean localSessionFactoryBean(DriverManagerDataSource dataSource, HibernateProperties hibernateProperties) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
@@ -27,7 +29,7 @@ public class HibernateConfiguration {
         hibernateProp.setProperty(KEY_HIBERNATE_SHOW_SQL, "true");
         hibernateProp.setProperty(KEY_HIBERNATE_HDM2DDL_AUTO, "update");
 
-        localSessionFactoryBean.setPackagesToScan("cz.mazl.tul.entity");
+        localSessionFactoryBean.setPackagesToScan("cz.mazl.tul.entity.db");
         localSessionFactoryBean.setDataSource(dataSource);
         return localSessionFactoryBean;
     }

@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${data.countryDataDTOList}" var="row">
+            <c:forEach items="${data.indexCountryDataDTOList}" var="row">
                 <tr>
                     <td>${row.cityName}</td>
                     <td>${row.temp}</td>
