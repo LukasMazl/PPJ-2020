@@ -26,21 +26,21 @@ public class HibernateConfiguration {
 
         Properties hibernateProp = localSessionFactoryBean.getHibernateProperties();
         hibernateProp.setProperty(KEY_HIBERNATE_DIALECT, hibernateProperties.getDialect());
-        hibernateProp.setProperty(KEY_HIBERNATE_SHOW_SQL, "true");
-        hibernateProp.setProperty(KEY_HIBERNATE_HDM2DDL_AUTO, "update");
+        hibernateProp.setProperty(KEY_HIBERNATE_SHOW_SQL, hibernateProperties.getShowSql());
+        hibernateProp.setProperty(KEY_HIBERNATE_HDM2DDL_AUTO, hibernateProperties.getHdm2ddl());
 
-        localSessionFactoryBean.setPackagesToScan("cz.mazl.tul.entity.db");
+        localSessionFactoryBean.setPackagesToScan(hibernateProperties.getPackageScan());
         localSessionFactoryBean.setDataSource(dataSource);
         return localSessionFactoryBean;
     }
 
     @Bean
-    public DriverManagerDataSource dataSource() {
+    public DriverManagerDataSource dataSource(HibernateProperties hibernateProperties) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        dataSource.setUrl("jdbc:oracle:thin:@192.168.99.100:1521/xe");
-        dataSource.setUsername("system");
-        dataSource.setPassword("oracle");
+        dataSource.setDriverClassName(hibernateProperties.getDriverClass());
+        dataSource.setUrl(hibernateProperties.getUrl());
+        dataSource.setUsername(hibernateProperties.getUsername());
+        dataSource.setPassword(hibernateProperties.getPassword());
         return dataSource;
     }
 }
