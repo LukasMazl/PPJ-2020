@@ -78,4 +78,18 @@ public class IndexCountryDataDTO {
     public void setMaxTemp(int maxTemp) {
         this.maxTemp = maxTemp;
     }
+
+    @Override
+    public String toString() {
+        return "IndexCountryDataDTO{" +
+                "cityName='" + cityName + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", avgTemp=" + avgTemp +
+                ", temp=" + temp +
+                ", minDate=" + minDate +
+                ", minTemp=" + minTemp +
+                ", maxDate=" + maxDate +
+                ", maxTemp=" + maxTemp +
+                '}';
+    }
 }

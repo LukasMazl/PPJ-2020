@@ -19,4 +19,12 @@ public class DeleteCountryDTO {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    @Override
+    public String toString() {
+        return "DeleteCountryDTO{" +
+                "iso='" + iso + '\'' +
+                ", countryName='" + countryName + '\'' +
+                '}';
+    }
 }

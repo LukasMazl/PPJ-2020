@@ -21,4 +21,12 @@ public class TemperatureDTO {
     public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
+
+    @Override
+    public String toString() {
+        return "TemperatureDTO{" +
+                "date=" + date +
+                ", temperature=" + temperature +
+                '}';
+    }
 }

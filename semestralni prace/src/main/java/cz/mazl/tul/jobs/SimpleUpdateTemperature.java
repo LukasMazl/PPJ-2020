@@ -30,6 +30,7 @@ public class SimpleUpdateTemperature implements UpdateTemperature {
         List<CityEntity> cityEntities = cityRepository.findAllByOrderByLastTemperatureUpdate(pageable);
         LOG.info("About {} cities will be updated.", cityEntities.size());
         cityEntities.stream().forEach((cityEntity -> {
+            LOG.info("Getting data for {}.", cityEntity.getName());
             CountryEntity countryEntity = cityEntity.getCountry();
             temperatureService.downloadAndUpdateTemperatureData(cityEntity, countryEntity);
         }));

@@ -45,4 +45,13 @@ public class UpdateCountryDTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateCountryDTO{" +
+                "originIso='" + originIso + '\'' +
+                ", iso='" + iso + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

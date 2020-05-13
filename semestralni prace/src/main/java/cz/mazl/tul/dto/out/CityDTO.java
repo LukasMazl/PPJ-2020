@@ -40,4 +40,14 @@ public class CityDTO {
     public void setCreated(Date created) {
         this.created = created;
     }
+
+    @Override
+    public String toString() {
+        return "CityDTO{" +
+                "cityName='" + cityName + '\'' +
+                ", temperatureDTOList=" + temperatureDTOList +
+                ", lastTemperatureUpdate=" + lastTemperatureUpdate +
+                ", created=" + created +
+                '}';
+    }
 }

@@ -22,6 +22,7 @@ import java.util.List;
 
 public class SimpleTemperatureService implements TemperatureService {
 
+    private static final String CSV_HEADER = "DATE;TEMP\n";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
     private TemperatureRepository temperatureRepository;
@@ -89,7 +90,7 @@ public class SimpleTemperatureService implements TemperatureService {
 
         List<TemperatureEntity> temperatureEntities = temperatureRepository.findAllByCountryIsoAndCity(countryIso, cityName);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getCSVHeader());
+        stringBuilder.append(CSV_HEADER);
         for (TemperatureEntity temperatureEntity : temperatureEntities) {
             stringBuilder.append(DATE_FORMAT.format(temperatureEntity.getDay()));
             stringBuilder.append(";");
@@ -99,10 +100,6 @@ public class SimpleTemperatureService implements TemperatureService {
         return stringBuilder.toString();
     }
 
-    //FIXME make dynamic
-    private String getCSVHeader() {
-        return "DATE;TEMP\n";
-    }
 
     private List<TemperatureCsvRow> parseCsvFileContent(String csvFileContent) {
         String[] lines = csvFileContent.split("\n");

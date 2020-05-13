@@ -44,7 +44,6 @@ public class SimplePrepareIndexDataService implements PrepareIndexDataService {
             CountryEntity countryEntity = countryEntities.iterator().next();
             selectedCountry = countryEntity.getIso();
 
-            //Add fetching from mongoDB
             List<CityEntity> cityEntityList = countryEntity.getCityList();
             indexCountryDataDTOS = getDataForCities(cityEntityList, countryEntity);
         } else {

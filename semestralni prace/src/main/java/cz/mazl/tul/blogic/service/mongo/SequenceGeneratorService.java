@@ -18,6 +18,7 @@ public class SequenceGeneratorService implements SequenceGenerator {
         this.mongoOperations = mongoOperations;
     }
 
+    @Override
     public long generateSequence(String seqName) {
         DatabaseSequence counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
                 new Update().inc("seq", 1), options().returnNew(true).upsert(true),

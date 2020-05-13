@@ -31,4 +31,13 @@ public class IndexDataDTO {
     public void setIndexCountryDataDTOList(List<IndexCountryDataDTO> indexCountryDataDTOList) {
         this.indexCountryDataDTOList = indexCountryDataDTOList;
     }
+
+    @Override
+    public String toString() {
+        return "IndexDataDTO{" +
+                "countryCodes=" + countryCodes +
+                ", codeSelectedCountry='" + codeSelectedCountry + '\'' +
+                ", indexCountryDataDTOList=" + indexCountryDataDTOList +
+                '}';
+    }
 }

@@ -30,4 +30,13 @@ public class CreateCountryDTO {
     public void setCityDTOList(List<String> cityDTOList) {
         this.cityDTOList = cityDTOList;
     }
+
+    @Override
+    public String toString() {
+        return "CreateCountryDTO{" +
+                "iso='" + iso + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", cityDTOList=" + cityDTOList +
+                '}';
+    }
 }

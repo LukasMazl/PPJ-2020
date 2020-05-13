@@ -1,22 +1,26 @@
 package cz.mazl.tul.blogic.service.country;
 
+import cz.mazl.tul.blogic.entity.db.CityEntity;
+import cz.mazl.tul.blogic.entity.db.CountryEntity;
+import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
 import cz.mazl.tul.blogic.exception.CountryAlreadyExistsException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.helper.CityServiceHelper;
+import cz.mazl.tul.blogic.repository.CountryRepository;
+import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
 import cz.mazl.tul.dto.in.country.CreateCountryDTO;
 import cz.mazl.tul.dto.in.country.DeleteCountryDTO;
 import cz.mazl.tul.dto.in.country.UpdateCountryDTO;
 import cz.mazl.tul.dto.out.CountryDataDTO;
-import cz.mazl.tul.blogic.entity.db.CityEntity;
-import cz.mazl.tul.blogic.entity.db.CountryEntity;
-import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
-import cz.mazl.tul.blogic.repository.CountryRepository;
-import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleCountryService implements CountryService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleCountryService.class);
 
     private CountryRepository countryRepository;
     private TemperatureRepository temperatureRepository;
@@ -30,8 +34,10 @@ public class SimpleCountryService implements CountryService {
 
     @Override
     public long createCountry(CreateCountryDTO countryDTO) {
+        LOG.trace("Creating country with {}.", countryDTO);
         CountryEntity countryEntity = countryRepository.findByIso(countryDTO.getIso());
         if (countryEntity != null) {
+            LOG.error("County with iso code {} does not exists.", countryDTO.getIso());
             throw new CountryAlreadyExistsException("Country " + countryDTO.getIso() + " already exists.");
         }
 
@@ -60,14 +66,17 @@ public class SimpleCountryService implements CountryService {
 
     @Override
     public void deleteCountry(DeleteCountryDTO deleteCountryDTO) {
+        LOG.trace("Deleting country with {}", deleteCountryDTO);
         countryRepository.deleteByNameOrIso(deleteCountryDTO.getCountryName(), deleteCountryDTO.getIso());
         temperatureRepository.deleteByCountryIso(deleteCountryDTO.getIso());
     }
 
     @Override
     public CountryDataDTO readCountry(String iso) {
+        LOG.trace("Reading country with iso {}.", iso);
         CountryEntity countryEntity = countryRepository.findByIso(iso);
         if (countryEntity == null) {
+            LOG.error("County with iso code {} does not exists.", iso);
             throw new CountryNotFoundException("Country with iso " + iso + " not exist.");
         }
         return cityServiceHelper.prepareCountryDataFromEntity(countryEntity);
@@ -75,6 +84,7 @@ public class SimpleCountryService implements CountryService {
 
     @Override
     public List<CountryDataDTO> readAll() {
+        LOG.trace("Reading all countries.");
         Iterable<CountryEntity> countryEntities = countryRepository.findAll();
         List<CountryDataDTO> countryDataDTOS = new ArrayList<>();
         for (CountryEntity countryEntity : countryEntities) {
@@ -87,8 +97,10 @@ public class SimpleCountryService implements CountryService {
 
     @Override
     public void updateCountry(UpdateCountryDTO updateCountryDTO) {
+        LOG.trace("Updating country with params {}.", updateCountryDTO);
         CountryEntity countryEntity = countryRepository.findByIso(updateCountryDTO.getOriginIso());
         if (countryEntity == null) {
+            LOG.error("County with iso code {} does not exists.", updateCountryDTO.getOriginIso());
             throw new CountryNotFoundException("Country with iso " + updateCountryDTO.getIso() + " not exist.");
         }
         countryEntity.setIso(updateCountryDTO.getIso());

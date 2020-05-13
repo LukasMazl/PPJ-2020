@@ -28,4 +28,12 @@ public class CityDTO implements City {
     public String countryIso() {
         return countryIso;
     }
+
+    @Override
+    public String toString() {
+        return "CityDTO{" +
+                "name='" + name + '\'' +
+                ", countryIso='" + countryIso + '\'' +
+                '}';
+    }
 }
