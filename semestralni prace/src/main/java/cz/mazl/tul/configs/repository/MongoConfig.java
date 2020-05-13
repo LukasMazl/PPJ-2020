@@ -1,6 +1,7 @@
 package cz.mazl.tul.configs.repository;
 
 import com.mongodb.MongoClient;
+import cz.mazl.tul.blogic.repository.mongo.TempAggregationTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,5 +23,11 @@ public class MongoConfig {
     @Bean
     public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongo(), mongoConfProperties.getDb());
+    }
+
+    @Bean
+    @Autowired
+    public TempAggregationTemplate tempAggregationTemplate(MongoTemplate mongoTemplate) {
+        return new TempAggregationTemplate(mongoTemplate);
     }
 }

@@ -1,5 +1,7 @@
 package cz.mazl.tul.blogic.service.temperature;
 
+import cz.mazl.tul.blogic.entity.db.CityEntity;
+import cz.mazl.tul.blogic.entity.db.CountryEntity;
 import cz.mazl.tul.blogic.exception.CityNotFoundException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
@@ -39,4 +41,12 @@ public interface TemperatureService {
      * @param city       city name
      */
     void downloadAndUpdateTemperatureData(String isoCountry, String city);
+
+    /**
+     * Update current weather for given country and city entity
+     *
+     * @param cityEntity    city entity
+     * @param countryEntity country entity
+     */
+    void downloadAndUpdateTemperatureData(CityEntity cityEntity, CountryEntity countryEntity);
 }

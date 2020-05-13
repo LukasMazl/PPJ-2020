@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class CountryRestController {
     }
 
     @RequestMapping(path = "/api/country/delete", method = RequestMethod.POST)
+    @Transactional
     public ResponseEntity<String> deleteCountry(@RequestBody DeleteCountryDTO deleteCountryDTO) {
         LOG.trace("Delete country invoked with {}.", deleteCountryDTO.toString());
         countryService.deleteCountry(deleteCountryDTO);
@@ -40,6 +42,7 @@ public class CountryRestController {
     }
 
     @RequestMapping(path = "/api/country/update/", method = RequestMethod.POST)
+    @Transactional
     public ResponseEntity<String> updateCountry(@RequestBody UpdateCountryDTO updateCountryDTO) {
         LOG.trace("update country invoked with {}.", updateCountryDTO.toString());
         countryService.updateCountry(updateCountryDTO);

@@ -2,6 +2,7 @@ package cz.mazl.tul.blogic.repository;
 
 import cz.mazl.tul.blogic.entity.db.CityEntity;
 import cz.mazl.tul.blogic.entity.db.CountryEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,6 @@ public interface CityRepository extends CrudRepository<CityEntity, Long> {
     void deleteByNameAndCountry(String name, CountryEntity countryEntity);
 
     List<CityEntity> findAllByCountry(CountryEntity countryEntity);
+
+    List<CityEntity> findAllByOrderByLastTemperatureUpdate(Pageable pageable);
 }

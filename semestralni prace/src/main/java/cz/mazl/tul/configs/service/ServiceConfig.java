@@ -4,6 +4,7 @@ import cz.mazl.tul.blogic.helper.CityServiceHelper;
 import cz.mazl.tul.blogic.provider.weather.WeatherApiProvider;
 import cz.mazl.tul.blogic.repository.CityRepository;
 import cz.mazl.tul.blogic.repository.CountryRepository;
+import cz.mazl.tul.blogic.repository.mongo.TempAggregationTemplate;
 import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
 import cz.mazl.tul.blogic.service.city.CityService;
 import cz.mazl.tul.blogic.service.city.ReadOnlyCityService;
@@ -54,8 +55,9 @@ public class ServiceConfig {
     }
 
     @Bean
-    public PrepareIndexDataService prepareIndexDataService() {
-        return new SimplePrepareIndexDataService(countryRepository, temperatureRepository);
+    @Autowired
+    public PrepareIndexDataService prepareIndexDataService(TempAggregationTemplate tempAggregationTemplate) {
+        return new SimplePrepareIndexDataService(countryRepository, temperatureRepository, tempAggregationTemplate);
     }
 
     @Bean

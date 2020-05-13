@@ -107,7 +107,8 @@ public class SimpleTemperatureService implements TemperatureService {
     private List<TemperatureCsvRow> parseCsvFileContent(String csvFileContent) {
         String[] lines = csvFileContent.split("\n");
         List<TemperatureCsvRow> temperatureCsvRows = new ArrayList<>();
-        for (String line : lines) {
+        for (int i = 1; i < lines.length; i++) {
+            String line = lines[i];
             TemperatureCsvRow temperatureCsvRow = parseLineFromCSV(line);
             temperatureCsvRows.add(temperatureCsvRow);
         }
@@ -136,6 +137,8 @@ public class SimpleTemperatureService implements TemperatureService {
         CityEntity cityEntity = new CityEntity();
         cityEntity.setName(city);
         cityEntity.setCountry(countryEntity);
+        cityEntity.setCreated(new Date());
+        cityEntity.setLastTemperatureUpdate(new Date());
         countryEntity.getCityList().add(cityEntity);
         countryRepository.save(countryEntity);
     }
@@ -156,22 +159,27 @@ public class SimpleTemperatureService implements TemperatureService {
             throw new CountryNotFoundException("Country with iso " + isoCountry + " does not exist.");
         }
 
-        CityEntity cityEntity = findCityEntityInList(countryEntity, city);
+        CityEntity cityEntity = cityRepository.findByNameAndCountry(city, countryEntity);
         if (cityEntity == null) {
             throw new CityNotFoundException("City with name " + isoCountry + " was not found in country " + countryEntity.getName());
         }
 
+        downloadAndUpdateTemperatureData(cityEntity, countryEntity);
+    }
+
+    @Override
+    public void downloadAndUpdateTemperatureData(CityEntity cityEntity, CountryEntity countryEntity) {
         Date now = new Date();
         cityEntity.setLastTemperatureUpdate(now);
         cityRepository.save(cityEntity);
 
-        WeatherData weatherData = weatherApiProvider.currentWeather(isoCountry, city);
+        WeatherData weatherData = weatherApiProvider.currentWeather(countryEntity.getIso(), cityEntity.getName());
         TemperatureEntity temperatureEntity = new TemperatureEntity();
         temperatureEntity.setId(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME));
-        temperatureEntity.setCountryIso(isoCountry);
+        temperatureEntity.setCountryIso(countryEntity.getIso());
         temperatureEntity.setTemp(weatherData.getMain().getTemp());
         temperatureEntity.setDay(now);
-        temperatureEntity.setCity(city);
+        temperatureEntity.setCity(cityEntity.getName());
         temperatureRepository.save(temperatureEntity);
     }
 }
