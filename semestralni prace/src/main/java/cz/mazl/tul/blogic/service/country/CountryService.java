@@ -1,10 +1,9 @@
 package cz.mazl.tul.blogic.service.country;
 
 import cz.mazl.tul.dto.out.CountryDataDTO;
-import cz.mazl.tul.dto.out.index.IndexCountryDataDTO;
-import cz.mazl.tul.dto.in.CreateCountryDTO;
-import cz.mazl.tul.dto.in.DeleteCountryDTO;
-import cz.mazl.tul.dto.in.UpdateCountryDTO;
+import cz.mazl.tul.dto.in.country.CreateCountryDTO;
+import cz.mazl.tul.dto.in.country.DeleteCountryDTO;
+import cz.mazl.tul.dto.in.country.UpdateCountryDTO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package cz.mazl.tul.blogic.service.mongo;
 
-import cz.mazl.tul.entity.mongo.DatabaseSequence;
+import cz.mazl.tul.blogic.entity.mongo.DatabaseSequence;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 

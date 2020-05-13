@@ -3,36 +3,46 @@ package cz.mazl.tul.blogic.service.temperature;
 import cz.mazl.tul.blogic.exception.CityNotFoundException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
+import cz.mazl.tul.blogic.provider.weather.WeatherApiProvider;
+import cz.mazl.tul.blogic.provider.weather.current.WeatherData;
+import cz.mazl.tul.blogic.repository.CityRepository;
 import cz.mazl.tul.blogic.service.mongo.SequenceGenerator;
-import cz.mazl.tul.entity.db.CityEntity;
-import cz.mazl.tul.entity.db.CountryEntity;
-import cz.mazl.tul.entity.mongo.TemperatureEntity;
-import cz.mazl.tul.repository.CountryRepository;
-import cz.mazl.tul.repository.mongo.TemperatureRepository;
+import cz.mazl.tul.blogic.entity.db.CityEntity;
+import cz.mazl.tul.blogic.entity.db.CountryEntity;
+import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
+import cz.mazl.tul.blogic.repository.CountryRepository;
+import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SimpleTemperatureService implements TemperatureService {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.mm.yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
     private TemperatureRepository temperatureRepository;
     private CountryRepository countryRepository;
     private SequenceGenerator sequenceGeneratorService;
+    private CityRepository cityRepository;
+    private WeatherApiProvider weatherApiProvider;
 
-    public SimpleTemperatureService(TemperatureRepository temperatureRepository, CountryRepository countryRepository, SequenceGenerator sequenceGeneratorService) {
+    public SimpleTemperatureService(TemperatureRepository temperatureRepository, CountryRepository countryRepository,
+                                    SequenceGenerator sequenceGeneratorService, WeatherApiProvider weatherApiProvider,
+                                    CityRepository cityRepository) {
         this.temperatureRepository = temperatureRepository;
         this.countryRepository = countryRepository;
         this.sequenceGeneratorService = sequenceGeneratorService;
+        this.weatherApiProvider = weatherApiProvider;
+        this.cityRepository = cityRepository;
     }
 
     @Override
     public void importTemperatureFromFile(MultipartFile multipartFile, String countryIso, String cityName) throws CountryNotFoundException, FileValidationException {
-        if(multipartFile == null) {
+        if (multipartFile == null) {
             throw new FileValidationException("File count not be null!");
         }
 
@@ -112,7 +122,6 @@ public class SimpleTemperatureService implements TemperatureService {
         }
 
         try {
-            System.out.println(values[1]);
             temperatureCsvRow.setDate(DATE_FORMAT.parse(values[0]));
             temperatureCsvRow.setValue(Integer.parseInt(values[1].trim()));
             return temperatureCsvRow;
@@ -138,5 +147,31 @@ public class SimpleTemperatureService implements TemperatureService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void downloadAndUpdateTemperatureData(String isoCountry, String city) {
+        CountryEntity countryEntity = countryRepository.findByIso(isoCountry);
+        if (countryEntity == null) {
+            throw new CountryNotFoundException("Country with iso " + isoCountry + " does not exist.");
+        }
+
+        CityEntity cityEntity = findCityEntityInList(countryEntity, city);
+        if (cityEntity == null) {
+            throw new CityNotFoundException("City with name " + isoCountry + " was not found in country " + countryEntity.getName());
+        }
+
+        Date now = new Date();
+        cityEntity.setLastTemperatureUpdate(now);
+        cityRepository.save(cityEntity);
+
+        WeatherData weatherData = weatherApiProvider.currentWeather(isoCountry, city);
+        TemperatureEntity temperatureEntity = new TemperatureEntity();
+        temperatureEntity.setId(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME));
+        temperatureEntity.setCountryIso(isoCountry);
+        temperatureEntity.setTemp(weatherData.getMain().getTemp());
+        temperatureEntity.setDay(now);
+        temperatureEntity.setCity(city);
+        temperatureRepository.save(temperatureEntity);
     }
 }

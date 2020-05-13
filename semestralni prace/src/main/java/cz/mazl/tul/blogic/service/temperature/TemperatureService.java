@@ -31,4 +31,12 @@ public interface TemperatureService {
      */
 
     String exportData(String countryIso, String cityName) throws CountryNotFoundException, CityNotFoundException;
+
+    /**
+     * Update current weather for given country identified by countryIso and city
+     *
+     * @param isoCountry country ISO
+     * @param city       city name
+     */
+    void downloadAndUpdateTemperatureData(String isoCountry, String city);
 }

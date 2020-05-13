@@ -3,11 +3,11 @@ package cz.mazl.tul.blogic.service.index;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.dto.out.index.IndexCountryDataDTO;
 import cz.mazl.tul.dto.out.index.IndexDataDTO;
-import cz.mazl.tul.entity.db.CityEntity;
-import cz.mazl.tul.entity.db.CountryEntity;
-import cz.mazl.tul.entity.mongo.TemperatureEntity;
-import cz.mazl.tul.repository.CountryRepository;
-import cz.mazl.tul.repository.mongo.TemperatureRepository;
+import cz.mazl.tul.blogic.entity.db.CityEntity;
+import cz.mazl.tul.blogic.entity.db.CountryEntity;
+import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
+import cz.mazl.tul.blogic.repository.CountryRepository;
+import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

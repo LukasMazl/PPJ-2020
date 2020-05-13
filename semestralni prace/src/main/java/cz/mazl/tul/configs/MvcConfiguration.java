@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
-    //TODO maybe not to be here.
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
