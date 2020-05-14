@@ -30,7 +30,7 @@
                                         "items": []
                                     },
                                     "bodyType": "Text",
-                                    "textBody": "{\n  \"countryIso\" : \"it\",\n  \"name\" : \"Rome\"\n}"
+                                    "textBody": "{\n  \"countryIso\" : \"cz\",\n  \"name\" : \"Liberec\"\n}"
                                 },
                                 "uri": {
                                     "query": {
@@ -121,7 +121,7 @@
                                         "version": "V11"
                                     },
                                     "host": "localhost:8080",
-                                    "path": "/api/city/readAllFromCountry/it"
+                                    "path": "/api/city/readAllFromCountry/cz"
                                 },
                                 "id": "7e904b5d-527d-4205-969d-f043cf31bfab",
                                 "name": "Read All",
@@ -195,7 +195,7 @@
                                         "items": []
                                     },
                                     "bodyType": "Text",
-                                    "textBody": "{\n  \"countryIso\" : \"cz\",\n  \"name\" : \"Prague\"\n}"
+                                    "textBody": "{\n  \"countryIso\" : \"cz\",\n  \"name\" : \"Liberec\",\n  \"originName\": \"Prague\"\n}"
                                 },
                                 "uri": {
                                     "query": {
@@ -254,7 +254,7 @@
                                         "version": "V11"
                                     },
                                     "host": "localhost:8080",
-                                    "path": "/download/cz/Liberec"
+                                    "path": "/download/cz/Prague"
                                 },
                                 "id": "f912f30f-5398-47d7-adb5-fce766ac0155",
                                 "name": "Export file",
@@ -380,7 +380,7 @@
                                         "version": "V11"
                                     },
                                     "host": "localhost:8080",
-                                    "path": "/api/temp/download/cz/Liberec"
+                                    "path": "/api/temp/download/cz/Prague"
                                 },
                                 "id": "88228142-5824-457a-9561-80a0a48af059",
                                 "name": "Download new Temperature",
@@ -488,7 +488,7 @@
                                         "items": []
                                     },
                                     "bodyType": "Text",
-                                    "textBody": "{\n  \"iso\" : \"cz\",\n  \"countryName\" : \"Ceska republika\"\n}"
+                                    "textBody": "{\n  \"iso\" : \"it\",\n  \"countryName\" : \"Italie\"\n}"
                                 },
                                 "uri": {
                                     "query": {
@@ -528,7 +528,7 @@
                                         "items": []
                                     },
                                     "bodyType": "Text",
-                                    "textBody": "{\n  \"iso\" : \"ge\"\n}"
+                                    "textBody": "{\n  \"iso\" : \"it\"\n}"
                                 },
                                 "uri": {
                                     "query": {
@@ -574,12 +574,11 @@
                                         "items": []
                                     },
                                     "scheme": {
-                                        "secure": true,
-                                        "name": "https",
+                                        "name": "http",
                                         "version": "V11"
                                     },
                                     "host": "localhost:8080",
-                                    "path": "/api/"
+                                    "path": "/api/country/read/it"
                                 },
                                 "id": "99648236-1c10-4f5f-a5d5-a6f09f02663c",
                                 "name": "Read Country",
@@ -590,9 +589,8 @@
                             "entity": {
                                 "type": "Request",
                                 "method": {
-                                    "requestBody": true,
-                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
-                                    "name": "POST"
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
                                 },
                                 "body": {
                                     "formBody": {
@@ -616,13 +614,7 @@
                                 },
                                 "id": "14b3f9da-6a18-4a06-82fa-5056087ac05d",
                                 "name": "Read All Countries",
-                                "headers": [
-                                    {
-                                        "enabled": true,
-                                        "name": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ]
+                                "headers": []
                             }
                         }
                     ]

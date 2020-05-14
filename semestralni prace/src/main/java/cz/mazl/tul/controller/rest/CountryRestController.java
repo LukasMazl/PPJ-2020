@@ -49,13 +49,13 @@ public class CountryRestController {
         return ResponseEntity.ok("Country has been updated");
     }
 
-    @PostMapping(path = "/api/country/read/{iso}")
+    @GetMapping(path = "/api/country/read/{iso}")
     public CountryDataDTO readCountry(@PathVariable String iso) {
         LOG.trace("Read country with iso {}.", iso);
         return countryService.readCountry(iso);
     }
 
-    @PostMapping(path = "/api/country/readAll")
+    @GetMapping(path = "/api/country/readAll")
     public List<CountryDataDTO> readAllCountry() {
         LOG.trace("Read all countries.");
         return countryService.readAll();
