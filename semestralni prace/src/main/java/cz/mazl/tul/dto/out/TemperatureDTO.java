@@ -3,7 +3,7 @@ package cz.mazl.tul.dto.out;
 import java.util.Date;
 
 public class TemperatureDTO {
-    private long tempId;
+    private String tempId;
     private Date date;
     private int temperature;
 
@@ -23,11 +23,11 @@ public class TemperatureDTO {
         this.temperature = temperature;
     }
 
-    public long getTempId() {
+    public String getTempId() {
         return tempId;
     }
 
-    public void setTempId(long tempId) {
+    public void setTempId(String tempId) {
         this.tempId = tempId;
     }
 

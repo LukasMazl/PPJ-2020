@@ -74,7 +74,7 @@ public class SimpleCityService implements CityService {
 
         WeatherData weatherData = weatherApiProvider.currentWeather(countryEntity.getIso(), cityEntity.getName());
         TemperatureEntity temperatureEntity = new TemperatureEntity();
-        temperatureEntity.setId(sequenceGenerator.generateSequence(TemperatureEntity.SEQUENCE_NAME));
+        temperatureEntity.setId(Long.toString(sequenceGenerator.generateSequence(TemperatureEntity.SEQUENCE_NAME)));
         temperatureEntity.setCity(cityEntity.getName());
         temperatureEntity.setTemp(weatherData.getMain().getTemp());
         temperatureEntity.setDay(new Date());

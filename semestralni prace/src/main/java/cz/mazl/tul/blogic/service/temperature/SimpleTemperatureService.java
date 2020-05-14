@@ -6,6 +6,7 @@ import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
 import cz.mazl.tul.blogic.exception.CityNotFoundException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
+import cz.mazl.tul.blogic.exception.RecordDataEntityNotFoundException;
 import cz.mazl.tul.blogic.provider.weather.WeatherApiProvider;
 import cz.mazl.tul.blogic.provider.weather.current.WeatherData;
 import cz.mazl.tul.blogic.repository.CityRepository;
@@ -75,7 +76,7 @@ public class SimpleTemperatureService implements TemperatureService {
                 temperatureEntity.setCountryIso(countryIso);
                 temperatureEntity.setDay(temperatureCsvRow.getDate());
                 temperatureEntity.setTemp(temperatureCsvRow.getValue());
-                temperatureEntity.setId(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME));
+                temperatureEntity.setId(Long.toString(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME)));
                 temperatureRepository.save(temperatureEntity);
             }
 
@@ -181,7 +182,7 @@ public class SimpleTemperatureService implements TemperatureService {
 
         WeatherData weatherData = weatherApiProvider.currentWeather(countryEntity.getIso(), cityEntity.getName());
         TemperatureEntity temperatureEntity = new TemperatureEntity();
-        temperatureEntity.setId(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME));
+        temperatureEntity.setId(Long.toString(sequenceGeneratorService.generateSequence(TemperatureEntity.SEQUENCE_NAME)));
         temperatureEntity.setCountryIso(countryEntity.getIso());
         temperatureEntity.setTemp(weatherData.getMain().getTemp());
         temperatureEntity.setDay(now);
@@ -192,7 +193,12 @@ public class SimpleTemperatureService implements TemperatureService {
     @Override
     public void updateTemperature(String id, int value) {
         Optional<TemperatureEntity> temperatureEntityOptional = temperatureRepository.findById(id);
+        LOG.debug("Returns {} entities.", temperatureEntityOptional.toString());
+        if (!temperatureEntityOptional.isPresent()) {
+            throw new RecordDataEntityNotFoundException("Record has not been found for id " + id);
+        }
         TemperatureEntity temperatureEntity = temperatureEntityOptional.get();
+
         temperatureEntity.setTemp(TemperatureUtils.celsiusToKelvin(value));
         temperatureRepository.save(temperatureEntity);
     }

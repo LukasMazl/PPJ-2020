@@ -3,6 +3,8 @@ package cz.mazl.tul.blogic.entity.mongo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
 
@@ -13,18 +15,19 @@ public class TemperatureEntity {
     public static final String SEQUENCE_NAME = "temp_sequence";
 
     @Id
-    private long id;
+    private String id;
+
     private String countryIso;
     private String city;
     private int temp;
 
     private Date day;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
