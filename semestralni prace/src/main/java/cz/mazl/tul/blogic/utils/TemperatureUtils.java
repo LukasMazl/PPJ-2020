@@ -7,4 +7,8 @@ public class TemperatureUtils {
     public static double kelvinToCelsius(double kelvin) {
         return kelvin - KELVIN_CONST;
     }
+
+    public static int celsiusToKelvin(int value) {
+        return value + (int) KELVIN_CONST;
+    }
 }

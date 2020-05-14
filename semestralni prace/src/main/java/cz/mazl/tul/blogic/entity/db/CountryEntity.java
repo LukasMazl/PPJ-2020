@@ -18,7 +18,7 @@ public class CountryEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CityEntity> cityList;
 
     public long getId() {

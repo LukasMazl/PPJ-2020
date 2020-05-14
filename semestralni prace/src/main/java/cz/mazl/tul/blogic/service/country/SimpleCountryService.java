@@ -14,6 +14,7 @@ import cz.mazl.tul.dto.in.country.UpdateCountryDTO;
 import cz.mazl.tul.dto.out.CountryDataDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,7 @@ public class SimpleCountryService implements CountryService {
         return cityEntities;
     }
 
+    @Transactional
     @Override
     public void deleteCountry(DeleteCountryDTO deleteCountryDTO) {
         LOG.trace("Deleting country with {}", deleteCountryDTO);

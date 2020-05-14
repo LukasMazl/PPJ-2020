@@ -1,17 +1,20 @@
 package cz.mazl.tul.blogic.service.temperature;
 
+import cz.mazl.tul.blogic.entity.db.CityEntity;
+import cz.mazl.tul.blogic.entity.db.CountryEntity;
+import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
 import cz.mazl.tul.blogic.exception.CityNotFoundException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
 import cz.mazl.tul.blogic.provider.weather.WeatherApiProvider;
 import cz.mazl.tul.blogic.provider.weather.current.WeatherData;
 import cz.mazl.tul.blogic.repository.CityRepository;
-import cz.mazl.tul.blogic.service.mongo.SequenceGenerator;
-import cz.mazl.tul.blogic.entity.db.CityEntity;
-import cz.mazl.tul.blogic.entity.db.CountryEntity;
-import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
 import cz.mazl.tul.blogic.repository.CountryRepository;
 import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
+import cz.mazl.tul.blogic.service.mongo.SequenceGenerator;
+import cz.mazl.tul.blogic.utils.TemperatureUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -19,8 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class SimpleTemperatureService implements TemperatureService {
+    private static final Logger LOG = LoggerFactory.getLogger(ReadOnlyTemperatureService.class);
 
     private static final String CSV_HEADER = "DATE;TEMP\n";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
@@ -44,16 +49,19 @@ public class SimpleTemperatureService implements TemperatureService {
     @Override
     public void importTemperatureFromFile(MultipartFile multipartFile, String countryIso, String cityName) throws CountryNotFoundException, FileValidationException {
         if (multipartFile == null) {
+            LOG.error("File for country {} and city {} is not valid", countryIso, cityName);
             throw new FileValidationException("File count not be null!");
         }
 
         CountryEntity countryEntity = countryRepository.findByIso(countryIso);
         if (countryEntity == null) {
+            LOG.error("Country not found with isoCode {}.", countryIso);
             throw new CountryNotFoundException("Country with iso " + countryIso + " does not exist.");
         }
 
         CityEntity cityEntity = findCityEntityInList(countryEntity, cityName);
         if (cityEntity == null) {
+            //If city does not exist create it.
             createNewCity(cityName, countryEntity);
         }
 
@@ -72,6 +80,7 @@ public class SimpleTemperatureService implements TemperatureService {
             }
 
         } catch (IOException e) {
+            LOG.error("Error processing file with isoCode {} and city {}", countryIso, cityName);
             throw new FileValidationException("Given bytes are not valid.");
         }
     }
@@ -178,5 +187,18 @@ public class SimpleTemperatureService implements TemperatureService {
         temperatureEntity.setDay(now);
         temperatureEntity.setCity(cityEntity.getName());
         temperatureRepository.save(temperatureEntity);
+    }
+
+    @Override
+    public void updateTemperature(String id, int value) {
+        Optional<TemperatureEntity> temperatureEntityOptional = temperatureRepository.findById(id);
+        TemperatureEntity temperatureEntity = temperatureEntityOptional.get();
+        temperatureEntity.setTemp(TemperatureUtils.celsiusToKelvin(value));
+        temperatureRepository.save(temperatureEntity);
+    }
+
+    @Override
+    public void deleteTemperature(String id) {
+        temperatureRepository.deleteById(id);
     }
 }

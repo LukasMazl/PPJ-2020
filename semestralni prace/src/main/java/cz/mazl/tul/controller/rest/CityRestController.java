@@ -6,6 +6,7 @@ import cz.mazl.tul.dto.in.city.DeleteCityDTO;
 import cz.mazl.tul.dto.in.city.ReadCityDTO;
 import cz.mazl.tul.dto.in.city.UpdateCityDTO;
 import cz.mazl.tul.dto.out.CityDTO;
+import oracle.jdbc.proxy.annotation.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,17 @@ public class CityRestController {
         this.cityService = cityService;
     }
 
-    @RequestMapping(path = "/api/city/readAllFromCountry/{isoCode}", method = RequestMethod.POST)
+    @PostMapping(path = "/api/city/readAllFromCountry/{isoCode}")
     public List<CityDTO> readAllCity(@PathVariable String isoCode) {
         return cityService.readAllFromCountry(isoCode);
     }
 
-    @RequestMapping(path = "/api/city/read")
+    @PostMapping(path = "/api/city/read")
     public CityDTO readCity(@RequestBody ReadCityDTO readCityDTO){
         return cityService.readCity(readCityDTO);
     }
 
-    @RequestMapping(path = "/api/city/create", method = RequestMethod.POST)
+    @PostMapping(path = "/api/city/create")
     @Transactional
     public ResponseEntity<String> createCity(@RequestBody CreateCityDTO createCityDTO) {
         LOG.trace("Create city invoked with {}.", createCityDTO.toString());
@@ -44,7 +45,7 @@ public class CityRestController {
         return ResponseEntity.ok("City has been created");
     }
 
-    @RequestMapping(path = "/api/city/delete", method = RequestMethod.POST)
+    @PostMapping(path = "/api/city/delete")
     @Transactional
     public ResponseEntity<String> deleteCity(@RequestBody DeleteCityDTO deleteCityDTO) {
         LOG.trace("Delete city invoked with {}.", deleteCityDTO.toString());
@@ -52,7 +53,7 @@ public class CityRestController {
         return ResponseEntity.ok("City has been deleted");
     }
 
-    @RequestMapping(path = "/api/city/update", method = RequestMethod.POST)
+    @PostMapping(path = "/api/city/update")
     @Transactional
     public ResponseEntity<String> updateCity(@RequestBody UpdateCityDTO updateCityDTO) {
         LOG.trace("Update city invoked with {}.", updateCityDTO.toString());

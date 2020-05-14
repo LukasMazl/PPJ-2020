@@ -49,4 +49,19 @@ public interface TemperatureService {
      * @param countryEntity country entity
      */
     void downloadAndUpdateTemperatureData(CityEntity cityEntity, CountryEntity countryEntity);
+
+    /**
+     * Updates temperature record by id
+     *
+     * @param id
+     * @param value
+     */
+    void updateTemperature(String id, int value);
+
+    /**
+     * Removes temperatures record recognised by id.
+     *
+     * @param id
+     */
+    void deleteTemperature(String id);
 }

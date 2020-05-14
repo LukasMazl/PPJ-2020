@@ -1,4 +1,4 @@
-package cz.mazl.tul.jobs;
+package cz.mazl.tul.jobs.update;
 
 import cz.mazl.tul.blogic.entity.db.CityEntity;
 import cz.mazl.tul.blogic.entity.db.CountryEntity;

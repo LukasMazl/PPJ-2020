@@ -11,10 +11,10 @@
         </encoder>
     </appender>
 
-    <springProfile name="devel">
+    <springProfile name="test">
         <logger level="debug" name="ppj"/>
     </springProfile>
-    <springProfile name="!devel">
+    <springProfile name="!test">
         <logger level="info" name="ppj"/>
     </springProfile>
     <logger level="warn" name="org.springframework"/>

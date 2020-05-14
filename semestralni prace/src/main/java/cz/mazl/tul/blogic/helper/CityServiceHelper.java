@@ -44,6 +44,7 @@ public class CityServiceHelper {
         List<TemperatureDTO> temperatureDTOs = new ArrayList<>();
         for (TemperatureEntity temperatureEntity : temperatureEntities) {
             TemperatureDTO temperatureDTO = new TemperatureDTO();
+            temperatureDTO.setTempId(temperatureEntity.getId());
             temperatureDTO.setDate(temperatureEntity.getDay());
             temperatureDTO.setTemperature((int) kelvinToCelsius((double) temperatureEntity.getTemp()));
             temperatureDTOs.add(temperatureDTO);

@@ -56,6 +56,7 @@ public class ServiceConfig {
 
     @Bean
     @Autowired
+    @Profile({"read-only", "test", "prod"})
     public PrepareIndexDataService prepareIndexDataService(TempAggregationTemplate tempAggregationTemplate) {
         return new SimplePrepareIndexDataService(countryRepository, temperatureRepository, tempAggregationTemplate);
     }

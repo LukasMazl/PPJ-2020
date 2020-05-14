@@ -1,15 +1,17 @@
 package cz.mazl.tul.blogic.service.index;
 
-import cz.mazl.tul.blogic.exception.CountryNotFoundException;
-import cz.mazl.tul.blogic.repository.mongo.TempAggregationTemplate;
-import cz.mazl.tul.blogic.utils.TemperatureUtils;
-import cz.mazl.tul.dto.out.index.IndexCountryDataDTO;
-import cz.mazl.tul.dto.out.index.IndexDataDTO;
 import cz.mazl.tul.blogic.entity.db.CityEntity;
 import cz.mazl.tul.blogic.entity.db.CountryEntity;
 import cz.mazl.tul.blogic.entity.mongo.TemperatureEntity;
+import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.repository.CountryRepository;
+import cz.mazl.tul.blogic.repository.mongo.TempAggregationTemplate;
 import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
+import cz.mazl.tul.blogic.utils.TemperatureUtils;
+import cz.mazl.tul.dto.out.index.IndexCountryDataDTO;
+import cz.mazl.tul.dto.out.index.IndexDataDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SimplePrepareIndexDataService implements PrepareIndexDataService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SimplePrepareIndexDataService.class);
 
     private CountryRepository countryRepository;
     private TemperatureRepository temperatureRepository;
@@ -64,10 +68,14 @@ public class SimplePrepareIndexDataService implements PrepareIndexDataService {
             indexCountryDataDTO.setCityName(cityEntity.getName());
             indexCountryDataDTO.setLastUpdate(cityEntity.getLastTemperatureUpdate());
             TemperatureEntity temperatureEntity = temperatureRepository.findTopByCountryIsoAndCityOrderByDay(countryEntity.getIso(), cityEntity.getName());
-            indexCountryDataDTO.setTemp((int) TemperatureUtils.kelvinToCelsius(temperatureEntity.getTemp()));
-            indexCountryDataDTO.setAvgTemp(getAvgTemperature(cityEntity.getName(), countryEntity.getIso()));
-            setMaxTemperature(indexCountryDataDTO, cityEntity, countryEntity);
-            setMinTemperature(indexCountryDataDTO, cityEntity, countryEntity);
+            if(temperatureEntity != null) {
+                indexCountryDataDTO.setTemp((int) TemperatureUtils.kelvinToCelsius(temperatureEntity.getTemp()));
+                indexCountryDataDTO.setAvgTemp(getAvgTemperature(cityEntity.getName(), countryEntity.getIso()));
+                setMaxTemperature(indexCountryDataDTO, cityEntity, countryEntity);
+                setMinTemperature(indexCountryDataDTO, cityEntity, countryEntity);
+            } else {
+                LOG.warn("No temperatureEntity found for city {}.", cityEntity.getName());
+            }
             indexCountryDataDTOS.add(indexCountryDataDTO);
         }
         return indexCountryDataDTOS;

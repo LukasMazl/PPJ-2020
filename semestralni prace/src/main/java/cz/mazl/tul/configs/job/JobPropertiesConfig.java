@@ -10,24 +10,46 @@ import javax.validation.constraints.NotNull;
 public class JobPropertiesConfig {
 
     @NotNull
-    private int interval;
+    private int updateInterval;
 
     @NotNull
-    private int batch;
+    private int updateBatch;
 
-    public int getInterval() {
-        return interval;
+    @NotNull
+    private int deleteExpiration;
+
+    @NotNull
+    private int intervalDeleteExpiration;
+
+    public int getUpdateInterval() {
+        return updateInterval;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setUpdateInterval(int updateInterval) {
+        this.updateInterval = updateInterval;
     }
 
-    public int getBatch() {
-        return batch;
+    public int getUpdateBatch() {
+        return updateBatch;
     }
 
-    public void setBatch(int batch) {
-        this.batch = batch;
+    public void setUpdateBatch(int updateBatch) {
+        this.updateBatch = updateBatch;
+    }
+
+    public int getDeleteExpiration() {
+        return deleteExpiration;
+    }
+
+    public void setDeleteExpiration(int deleteExpiration) {
+        this.deleteExpiration = deleteExpiration;
+    }
+
+    public int getIntervalDeleteExpiration() {
+        return intervalDeleteExpiration;
+    }
+
+    public void setIntervatDeleteExpiration(int intervalDeleteExpiration) {
+        this.intervalDeleteExpiration = intervalDeleteExpiration;
     }
 }

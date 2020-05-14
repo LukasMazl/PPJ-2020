@@ -1,21 +1,23 @@
 package cz.lukas.mazl.test;
 
-import cz.mazl.tul.blogic.service.index.PrepareIndexDataService;
+import cz.mazl.tul.Application;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
+import cz.mazl.tul.blogic.service.index.PrepareIndexDataService;
 import cz.mazl.tul.blogic.service.temperature.TemperatureService;
-import cz.mazl.tul.configs.service.ServiceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {ServiceConfig.class})
+@SpringBootTest(classes = Application.class)
 @ActiveProfiles(profiles = "test")
+@Order(1)
 public class BaseTest {
 
     @Autowired
@@ -31,7 +33,7 @@ public class BaseTest {
 
     @Test(expected = FileValidationException.class)
     public void testImport() {
-        temperatureService.importTemperatureFromFile(null,null, "Praha");
+        temperatureService.importTemperatureFromFile(null, null, "Praha");
     }
 
     @Test(expected = CountryNotFoundException.class)

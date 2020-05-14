@@ -25,4 +25,18 @@ public class TemperatureRestController {
         temperatureService.downloadAndUpdateTemperatureData(country, city);
         return ResponseEntity.ok("Temperature has been updated.");
     }
+
+    @RequestMapping(path = "/api/temp/update/{id}/{value}")
+    public HttpEntity<String> updateTemperature(@PathVariable String id, @PathVariable Integer value) {
+        LOG.trace("Updating temperature by id {} on {}.", id, value);
+        temperatureService.updateTemperature(id, value);
+        return ResponseEntity.ok("Temperature has been updated.");
+    }
+
+    @RequestMapping(path = "/api/temp/delete/{id}")
+    public HttpEntity<String> deleteTemperature(@PathVariable String id) {
+        LOG.trace("Deleting temperature by id {}", id);
+        temperatureService.deleteTemperature(id);
+        return ResponseEntity.ok("Temperature has been deleted.");
+    }
 }

@@ -1,12 +1,15 @@
 package cz.mazl.tul.blogic.provider.weather;
 
+import cz.mazl.tul.blogic.exception.ServiceException;
 import cz.mazl.tul.blogic.provider.weather.current.WeatherData;
 import cz.mazl.tul.blogic.provider.weather.historical.HistoricalWeatherData;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -31,9 +34,13 @@ public class SimpleWeatherApiProvider implements WeatherApiProvider {
         RestTemplate restTemplate = new RestTemplate();
         String urlAndQuery = prepareUrlAndQuery(country, city);
         LOG.debug("Getting response from url {}", urlAndQuery);
-        ResponseEntity<WeatherData> response
-                = restTemplate.getForEntity(urlAndQuery, WeatherData.class);
-        return response.getBody();
+        try {
+            ResponseEntity<WeatherData> response
+                    = restTemplate.getForEntity(urlAndQuery, WeatherData.class);
+            return response.getBody();
+        } catch (HttpClientErrorException clientErrorException) {
+            throw new ServiceException("City " + city + "have not been found for country " + country);
+        }
     }
 
     private String prepareUrlAndQuery(String country, String city) {
