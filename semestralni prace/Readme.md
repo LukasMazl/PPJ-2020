@@ -12,6 +12,29 @@ to prezentuje jako 'ServiceException()'.
 Pro jednoduší testování rest api jsem vytvořil projekt v Restlet clientovi, který je možný si naimportovat. 
 JSON pro import je uložený v složce doc/ 
 
+## Popis jobů
+Aplikace využívá joby pro průběžnou aktualizaci dat a pro hlídání expirace záznamů v mondodb
+
+### Job OldDataRemover 
+Zdůvodů testovatelnosti je interval tohoto jobu nastaven na 1000ms. Job se spustí a smaže staré záznamy. Doba záznamu je konfigurovatlná přes properties
+
+```properties
+#Inteval (miliseconds) for deleting old records
+cz.mazl.tul.job.intervatDeleteExpiration=3600
+#Expiration days
+cz.mazl.tul.job.deleteExpiration=14
+```
+
+### Job UpdateTemperature
+Tento job průběžně aktualizuje a stahuje záznamy o aktuální teplotách. Po stažení jsou záznamy uloženy do mongoDB a u entity města, u kterého probíhal update je aktualizování proměnná lastUpdate. Podle této hodnoty datumu jsou brány ostatní města. Weather REST API má limitovaný počet možných requestů, proto je možné tento job upravovat pomocí properties. 
+
+```properties
+#Inteval (miliseconds) for updating of city weathers
+cz.mazl.tul.job.updateInterval=10000
+#Max number of cities whose weather stats will be updated
+cz.mazl.tul.job.updateBatch=60
+```
+    
 ## Read-only mode
 Aplikaci je možné spustit v read-only modu pomocí aktivování spring profilu ,,read-only"
 
