@@ -12,7 +12,7 @@ to prezentuje jako 'ServiceException()'.
 Pro jednoduší testování rest api jsem vytvořil projekt v Restlet clientovi, který je možný si naimportovat. 
 JSON pro import je uložený v složce doc/ 
 
-##Read-only mode
+## Read-only mode
 Aplikaci je možné spustit v read-only modu pomocí aktivování spring profilu ,,read-only"
 
 ```cmd
