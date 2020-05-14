@@ -1,4 +1,5 @@
-#Semestrální práce z PPJ 2020
+# Semestrální práce z PPJ 2020
+
 Aplikace shromažduje data z Weather api a umožnuje uživateli tyto data prohlížet, editovat 
 a dále s nimi pracovat přes REST API.
 
@@ -7,7 +8,7 @@ Pokud je země založena, poté je koumikováno na Weather api, ze kterého je z
 jestli toto město existuje. Pokud neexstistuje, Weather api vrací 404 a aplikace
 to prezentuje jako 'ServiceException()'.
 
-##Komunikace na REST api
+## Komunikace na REST api
 Pro jednoduší testování rest api jsem vytvořil projekt v Restlet clientovi, který je možný si naimportovat. 
 JSON pro import je uložený v složce doc/ 
 
