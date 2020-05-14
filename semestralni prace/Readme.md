@@ -1,5 +1,4 @@
 #Semestrální práce z PPJ 2020
-
 Aplikace shromažduje data z Weather api a umožnuje uživateli tyto data prohlížet, editovat 
 a dále s nimi pracovat přes REST API.
 
