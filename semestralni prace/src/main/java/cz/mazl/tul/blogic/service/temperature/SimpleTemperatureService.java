@@ -14,6 +14,7 @@ import cz.mazl.tul.blogic.repository.CountryRepository;
 import cz.mazl.tul.blogic.repository.mongo.TemperatureRepository;
 import cz.mazl.tul.blogic.service.mongo.SequenceGenerator;
 import cz.mazl.tul.blogic.utils.TemperatureUtils;
+import cz.mazl.tul.dto.out.TemperatureDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,7 @@ public class SimpleTemperatureService implements TemperatureService {
     private static final Logger LOG = LoggerFactory.getLogger(ReadOnlyTemperatureService.class);
 
     private static final String CSV_HEADER = "DATE;TEMP\n";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     private TemperatureRepository temperatureRepository;
     private CountryRepository countryRepository;
@@ -45,6 +46,10 @@ public class SimpleTemperatureService implements TemperatureService {
         this.sequenceGeneratorService = sequenceGeneratorService;
         this.weatherApiProvider = weatherApiProvider;
         this.cityRepository = cityRepository;
+    }
+
+    public SimpleTemperatureService(TemperatureRepository temperatureRepository) {
+        this.temperatureRepository = temperatureRepository;
     }
 
     @Override
@@ -206,5 +211,20 @@ public class SimpleTemperatureService implements TemperatureService {
     @Override
     public void deleteTemperature(String id) {
         temperatureRepository.deleteById(id);
+    }
+
+    @Override
+    public TemperatureDTO readTemperature(String id) {
+        Optional<TemperatureEntity> temperatureEntityOptional = temperatureRepository.findById(id);
+        LOG.debug("Returns {} entities.", temperatureEntityOptional.toString());
+        if (!temperatureEntityOptional.isPresent()) {
+            throw new RecordDataEntityNotFoundException("Record has not been found for id " + id);
+        }
+        TemperatureEntity temperatureEntity = temperatureEntityOptional.get();
+        TemperatureDTO temperatureDTO = new TemperatureDTO();
+        temperatureDTO.setDate(temperatureEntity.getDay());
+        temperatureDTO.setTempId(temperatureEntity.getId());
+        temperatureDTO.setTemperature((int) TemperatureUtils.kelvinToCelsius(temperatureEntity.getTemp()));
+        return temperatureDTO;
     }
 }

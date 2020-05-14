@@ -15,5 +15,18 @@ public interface WeatherApiProvider {
      */
     WeatherData currentWeather(String country, String city);
 
+
+    /**
+     * For using this is need premium account
+     *
+     * @param country
+     * @param city
+     * @param type
+     * @param start
+     * @param end
+     * @param count
+     * @return
+     */
+    @Deprecated
     HistoricalWeatherData historicalData(String country, String city, String type, Date start, Date end, String count);
 }

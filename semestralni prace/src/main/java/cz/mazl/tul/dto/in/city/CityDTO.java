@@ -2,8 +2,13 @@ package cz.mazl.tul.dto.in.city;
 
 import cz.mazl.tul.blogic.service.city.City;
 
+import javax.validation.constraints.NotBlank;
+
 public class CityDTO implements City {
+    @NotBlank(message = "Name is mandatory")
     private String name;
+
+    @NotBlank(message = "Country is mandatory")
     private String countryIso;
 
 

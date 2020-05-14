@@ -20,4 +20,9 @@ public class IndexController {
         modelMap.addAttribute("data", indexDataDTO);
         return "index";
     }
+
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public String getHome() {
+        return "forward:/index";
+    }
 }

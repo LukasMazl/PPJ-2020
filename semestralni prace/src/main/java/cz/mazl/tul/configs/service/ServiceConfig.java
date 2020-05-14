@@ -50,8 +50,9 @@ public class ServiceConfig {
 
     @Bean
     @Profile("read-only")
-    public TemperatureService temperatureServiceReadOnly() {
-        return new ReadOnlyTemperatureService();
+    @Autowired
+    public TemperatureService temperatureServiceReadOnly(TemperatureRepository temperatureRepository) {
+        return new ReadOnlyTemperatureService(temperatureRepository);
     }
 
     @Bean

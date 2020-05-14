@@ -23,7 +23,7 @@ public class ReadOnlyCityService extends SimpleCityService {
     }
 
     @Override
-    public void updateCity(City city) {
+    public void updateCity(String originName, City city) {
         LOG.error("Application running in readOnly mode. This method is not allowed.");
         throw new ReadOnlyModeException("Application running in readOnly mode. This method is not allowed.");
     }

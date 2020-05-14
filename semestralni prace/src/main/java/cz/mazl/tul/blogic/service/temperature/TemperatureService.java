@@ -5,6 +5,7 @@ import cz.mazl.tul.blogic.entity.db.CountryEntity;
 import cz.mazl.tul.blogic.exception.CityNotFoundException;
 import cz.mazl.tul.blogic.exception.CountryNotFoundException;
 import cz.mazl.tul.blogic.exception.FileValidationException;
+import cz.mazl.tul.dto.out.TemperatureDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface TemperatureService {
@@ -64,4 +65,12 @@ public interface TemperatureService {
      * @param id
      */
     void deleteTemperature(String id);
+
+    /**
+     * Read temperature value by id
+     *
+     * @param id
+     * @return temperaturDTO
+     */
+    TemperatureDTO readTemperature(String id);
 }

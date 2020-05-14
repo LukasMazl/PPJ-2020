@@ -20,8 +20,9 @@ public interface CityService {
      * Method for updating city entity
      *
      * @param city
+     * @param originName
      */
-    void updateCity(City city);
+    void updateCity(String originName, City city);
 
     /**
      * Reads all data about city with temperature from Mongodb

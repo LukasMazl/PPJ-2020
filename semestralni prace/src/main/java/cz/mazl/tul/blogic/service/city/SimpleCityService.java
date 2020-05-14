@@ -83,7 +83,7 @@ public class SimpleCityService implements CityService {
     }
 
     @Override
-    public void updateCity(City city) {
+    public void updateCity(String originName, City city) {
         LOG.trace("Updating city {}", city);
         CountryEntity countryEntity = countryRepository.findByIso(city.countryIso());
         if (countryEntity == null) {
@@ -91,13 +91,13 @@ public class SimpleCityService implements CityService {
             throw new CountryNotFoundException("Country with iso " + city.countryIso() + " does not exist.");
         }
 
-        CityEntity entity = cityRepository.findByNameAndCountry(city.getName(), countryEntity);
+        CityEntity entity = cityRepository.findByNameAndCountry(originName, countryEntity);
         if (entity == null) {
-            LOG.error("City with name {} does not exist.", city.getName());
-            throw new CityNotFoundException("City with name " + city.getName() + " already exists.");
+            LOG.error("City with name {} does not exist.", originName);
+            throw new CityNotFoundException("City with name " + originName + " already exists.");
         }
 
-        List<TemperatureEntity> temperatureEntities = temperatureRepository.findAllByCountryIsoAndCity(countryEntity.getIso(), entity.getName());
+        List<TemperatureEntity> temperatureEntities = temperatureRepository.findAllByCountryIsoAndCity(countryEntity.getIso(), originName);
         temperatureEntities.stream().forEach((temperatureEntity) -> temperatureEntity.setCity(city.getName()));
         temperatureRepository.saveAll(temperatureEntities);
 
@@ -130,8 +130,13 @@ public class SimpleCityService implements CityService {
             LOG.error("Country {} does not exist.", city.countryIso());
             throw new CountryNotFoundException("Country with iso " + city.countryIso() + " does not exist.");
         }
-        cityRepository.deleteByNameAndCountry(city.getName(), countryEntity);
-        temperatureRepository.deleteByCountryIsoAndCity(countryEntity.getIso(), city.getName());
+        CityEntity cityEntity = cityRepository.findByNameAndCountry(city.getName(), countryEntity);
+        if(cityEntity != null) {
+            countryEntity.getCityList().remove(cityEntity);
+            countryRepository.save(countryEntity);
+            cityRepository.deleteByNameAndCountry(city.getName(), countryEntity);
+            temperatureRepository.deleteByCountryIsoAndCity(countryEntity.getIso(), city.getName());
+        }
     }
 
     @Override
