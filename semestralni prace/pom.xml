@@ -18,7 +18,7 @@
 
     <properties>
         <jdbc.oracle.version>11.2.0.3</jdbc.oracle.version>
-        <hibernate.version>5.2.14.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <spring.orm.version>4.3.26.RELEASE</spring.orm.version>
     </properties>
 
